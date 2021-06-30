@@ -6,20 +6,20 @@ public class PlayerController : MonoBehaviour
 {   
     // declared private because we don't want them to be very accessible
     public float velocity = 5.0f;
-    public float acceleration = 0.0f;
+    //public float acceleration = 0.0f;
     private float turnSpeed = 25.0f;
-    public const float tyreFriction = 0.07f;
-    public const float gravityForce = 9.8f;
+    //public const float tyreFriction = 0.07f;
+    //public const float gravityForce = 9.8f;
     private float horizontalInput;
     private float forwardInput;
-    Rigidbody rb;
-    private float mass;
+    //Rigidbody rb;
+    //private float mass;
 
     // Start is called before the first frame update
     void Start()
     {
-        rb = GetComponent<Rigidbody>();
-        mass = rb.mass;
+        //rb = GetComponent<Rigidbody>();
+        //mass = rb.mass;
     }
 
     // Update is called once per frame
