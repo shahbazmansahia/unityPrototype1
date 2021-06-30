@@ -5,16 +5,21 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {   
     // declared private because we don't want them to be very accessible
-    private float velocity = 5.0f;
-    private float acceleration;
+    public float velocity = 5.0f;
+    public float acceleration = 0.0f;
     private float turnSpeed = 25.0f;
+    public const float tyreFriction = 0.07f;
+    public const float gravityForce = 9.8f;
     private float horizontalInput;
     private float forwardInput;
+    Rigidbody rb;
+    private float mass;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        rb = GetComponent<Rigidbody>();
+        mass = rb.mass;
     }
 
     // Update is called once per frame
@@ -23,9 +28,20 @@ public class PlayerController : MonoBehaviour
         // For getting the input and translating it into movement values
         horizontalInput = Input.GetAxis("Horizontal");
         forwardInput = Input.GetAxis("Vertical");
+        /*  Tried to add force-based acceleration
+        if ((velocity > 0) && (forwardInput > 0))
+        {
+            acceleration += (velocity > 0) ? forwardInput - (tyreFriction * gravityForce) : 0;
+        }
+        velocity = Time.deltaTime * acceleration;
+        */
         // Move the vehicle forward
-        transform.Translate(Vector3.forward * Time.deltaTime * velocity * forwardInput);
+        transform.Translate(Vector3.forward * velocity * Time.deltaTime * forwardInput);
         // For horizontal mobility
-        transform.Rotate(Vector3.up, Time.deltaTime * turnSpeed * horizontalInput);
+        if (forwardInput != 0)
+        {
+            transform.Rotate(Vector3.up, Time.deltaTime * turnSpeed * horizontalInput);
+        }
+        
     }
 }
