@@ -15,8 +15,8 @@ public class CameraSystemController : MonoBehaviour
     void Start()
     {
         firstCam.gameObject.SetActive(false);
-        secondCam.gameObject.SetActive(true);
-        thirdCam.gameObject.SetActive(false);
+        secondCam.gameObject.SetActive(false);
+        thirdCam.gameObject.SetActive(true);
 
         Debug.Log(camVec.Length);
 

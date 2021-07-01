@@ -11,7 +11,7 @@ public class ThirdCamController : MonoBehaviour
     private Vector3 camOffThird;
     private Vector3[] camOffVec;
     */
-    private Vector3 offset = new Vector3(-3, 1.95f, 10.5f);
+    private Vector3 offset = new Vector3(0.0f, 1.95f, 2.977f);
     // Start is called before the first frame update
     void Start()
     {
