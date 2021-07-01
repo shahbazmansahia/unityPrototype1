@@ -18,6 +18,8 @@ public class CameraSystemController : MonoBehaviour
         secondCam.gameObject.SetActive(true);
         thirdCam.gameObject.SetActive(false);
 
+        Debug.Log(camVec.Length);
+
         numCams = 3;
         camVec[0] = firstCam;
         camVec[1] = secondCam;
@@ -25,7 +27,7 @@ public class CameraSystemController : MonoBehaviour
 
         currCam = 0;
 
-
+        Debug.Log(camVec.Length);
     }
 
     // Update is called once per frame
@@ -38,6 +40,7 @@ public class CameraSystemController : MonoBehaviour
             currCam = (currCam + 1) % numCams;
             camVec[currCam].gameObject.SetActive(true);
             Debug.Log("Cam Activation Process Complete!");
+            Debug.Log(camVec.Length);
         }
     }
 }
