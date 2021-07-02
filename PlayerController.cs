@@ -10,8 +10,8 @@ public class PlayerController : MonoBehaviour
     private float turnSpeed = 25.0f;
     //public const float tyreFriction = 0.07f;
     //public const float gravityForce = 9.8f;
-    private float horizontalInput;
-    private float forwardInput;
+    public float horizontalInput;
+    public float forwardInput;
     //Rigidbody rb;
     //private float mass;
 
