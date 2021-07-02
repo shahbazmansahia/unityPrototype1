@@ -10,8 +10,8 @@ public class Player2Controller : MonoBehaviour
     private float turnSpeed = 25.0f;
     //public const float tyreFriction = 0.07f;
     //public const float gravityForce = 9.8f;
-    public float horizontalInput;
-    public float forwardInput;
+    private float horizontalInput;
+    private float forwardInput;
     //Rigidbody rb;
     //private float mass;
 
@@ -42,6 +42,6 @@ public class Player2Controller : MonoBehaviour
         {
             transform.Rotate(Vector3.up, Time.deltaTime * turnSpeed * horizontalInput);
         }
-
+        
     }
 }
