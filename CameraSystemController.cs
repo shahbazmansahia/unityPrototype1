@@ -20,10 +20,17 @@ public class CameraSystemController : MonoBehaviour
         secondCam.gameObject.SetActive(false);
         thirdCam.gameObject.SetActive(false);
         mainCam = firstCam;
+
+        firstCam.rect = new Rect((0), (0), 0.5f, 1.0f);
+        secondCam.rect = new Rect((0), (0), 0.5f, 1.0f);
+        thirdCam.rect = new Rect((0), (0), 0.5f, 1.0f);
         //Debug.Log(camVec.Length);
         numCams = 3;
         currCam = 0;
         numPlayers = 2;
+
+        Debug.Log(Screen.width);
+        Debug.Log(Screen.height);
         /*
         
         camVec[0] = firstCam;
@@ -42,6 +49,7 @@ public class CameraSystemController : MonoBehaviour
         if (Input.GetKeyDown("c"))
         {
             Debug.Log("C Pressed!");
+            
             currCam++;
             currCam %= numCams;
             //camVec[currCam].gameObject.SetActive(false);
@@ -52,21 +60,21 @@ public class CameraSystemController : MonoBehaviour
                 case 0:
                     firstCam.gameObject.SetActive(true);
                     thirdCam.gameObject.SetActive(false);
-                    firstCam.rect = new Rect((0), (0), (Screen.width / 2), (Screen.height));
+                    //firstCam.rect = new Rect((0), (0), 0.5f, 1.0f);
                     mainCam = firstCam;
                     break;
 
                 case 1:
                     secondCam.gameObject.SetActive(true);
                     firstCam.gameObject.SetActive(false);
-                    secondCam.rect = new Rect((0), (0), (Screen.width / 2), (Screen.height));
+                    //secondCam.rect = new Rect((0), (0), (Screen.width / 2), (Screen.height));
                     mainCam = secondCam;
                     break;
 
                 case 2:
                     thirdCam.gameObject.SetActive(true);
                     secondCam.gameObject.SetActive(false);
-                    thirdCam.rect = new Rect((0), (0), (Screen.width / 2), (Screen.height));
+                    //thirdCam.rect = new Rect((0), (0), (Screen.width / 2), (Screen.height));
                     mainCam = thirdCam;
                     break;
 

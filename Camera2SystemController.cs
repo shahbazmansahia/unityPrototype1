@@ -19,6 +19,10 @@ public class Camera2SystemController : MonoBehaviour
         secondCam.gameObject.SetActive(false);
         thirdCam.gameObject.SetActive(false);
         mainCam = firstCam;
+
+        firstCam.rect = new Rect(0.5f, (0), 0.5f, 1);
+        secondCam.rect = new Rect(0.5f, (0), 0.5f, 1);
+        thirdCam.rect = new Rect(0.5f, (0), 0.5f, 1);
         //Debug.Log(camVec.Length);
         numPlayers = 2;
         numCams = 3;
@@ -51,21 +55,21 @@ public class Camera2SystemController : MonoBehaviour
                 case 0:
                     firstCam.gameObject.SetActive(true);
                     thirdCam.gameObject.SetActive(false);
-                    firstCam.rect = new Rect((Screen.width / 2), (0), (Screen.width / 2), (Screen.height));
+                    //firstCam.rect = new Rect(0.5f, (0), 0.5f, 1);
                     mainCam = firstCam;
                     break;
 
                 case 1:
                     secondCam.gameObject.SetActive(true);
                     firstCam.gameObject.SetActive(false);
-                    secondCam.rect = new Rect((Screen.width / 2), (0), (Screen.width / 2), (Screen.height));
+                    //secondCam.rect = new Rect((Screen.width / 2), (0), (Screen.width / 2), (Screen.height));
                     mainCam = secondCam;
                     break;
 
                 case 2:
                     thirdCam.gameObject.SetActive(true);
                     secondCam.gameObject.SetActive(false);
-                    thirdCam.rect = new Rect((Screen.width / 2), (0), (Screen.width / 2), (Screen.height));
+                    //thirdCam.rect = new Rect((Screen.width / 2), (0), (Screen.width / 2), (Screen.height));
                     mainCam = thirdCam;
                     break;
 
