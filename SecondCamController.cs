@@ -11,7 +11,7 @@ public class SecondCamController : MonoBehaviour
     private Vector3 camOffThird;
     private Vector3[] camOffVec;
     */
-    private Vector3 offset = new Vector3(3.014480847f, 0.79f, -7.66f);
+    [SerializeField] private Vector3 offset = new Vector3(3.014480847f, 0.79f, -7.66f);
     //private Vector3 offRotation = new Vector3 (Vector3.up, 11.0);
     // Start is called before the first frame update
     void Start()

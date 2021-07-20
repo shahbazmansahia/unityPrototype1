@@ -11,7 +11,7 @@ public class MainCamController : MonoBehaviour
     private Vector3 camOffThird;
     private Vector3[] camOffVec;
     */
-    private Vector3 offset = new Vector3(0, 7, -12);
+    [SerializeField] private Vector3 offset = new Vector3(0, 7, -12);
     // Start is called before the first frame update
     void Start()
     {
