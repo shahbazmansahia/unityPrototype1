@@ -29,7 +29,7 @@ public class Player2Controller : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         // For getting the input and translating it into movement values
         horizontalInput = Input.GetAxis("Horizontal2");
