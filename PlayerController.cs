@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
 
 
     [SerializeField] public float velocity = 5.0f;
+    [SerializeField] public float rpm;
     [SerializeField] private float horsePower = 0.0f;
     [SerializeField] private float turnSpeed = 25.0f;
 
@@ -27,8 +28,11 @@ public class PlayerController : MonoBehaviour
     public GameObject wheel4;           // wheel back right
 
     [SerializeField] private GameObject centreOfMass;
+    public List<WheelCollider> allWheels;
+    private int wheelsOnGround;
 
     public TextMeshProUGUI speedoMeterText;
+    public TextMeshProUGUI rpmText;
     //Rigidbody rb;
     //private float mass;
 
@@ -58,41 +62,74 @@ public class PlayerController : MonoBehaviour
         // Move the vehicle forward
         //transform.Translate(Vector3.forward * velocity * Time.deltaTime * forwardInput);
 
-        // This makes the transform-Translate approach redundant; We are finally trying the acceleration approach!
-        playerRb.AddRelativeForce(Vector3.forward * forwardInput * horsePower);
-
-        // for displaying the speed on the UI
-        velocity = Mathf.Round(playerRb.velocity.magnitude * KILOMETERCONST);
-        speedoMeterText.text = "Speed: " + velocity;
-
-        // For horizontal mobility
-        if (forwardInput != 0)
+        if (isOnGround())
         {
-            transform.Rotate(Vector3.up, Time.deltaTime * turnSpeed * horizontalInput);
-            if (forwardInput > 0)
+            // This makes the transform-Translate approach redundant; We are finally trying the acceleration approach!
+            playerRb.AddRelativeForce(Vector3.forward * forwardInput * horsePower);
+
+            // for displaying the speed on the UI
+            velocity = Mathf.Round(playerRb.velocity.magnitude * KILOMETERCONST);
+            speedoMeterText.text = "Speed: " + velocity;
+            rpm = Mathf.Round((velocity % 30) * 40);
+            rpmText.text = "RPM: " + rpm;
+
+            // For horizontal mobility
+            if (forwardInput != 0)
             {
-                // disabling for acceleration approach
-                //wheelRotate(Vector3.right);
+                transform.Rotate(Vector3.up, Time.deltaTime * turnSpeed * horizontalInput);
+                if (forwardInput > 0)
+                {
+                    // disabling for acceleration approach
+                    //wheelRotate(Vector3.right);
+                }
+                else
+                {
+                    // disabling for acceleration approach
+                    //wheelRotate(Vector3.left);
+                }
+                /*
+                if (horizontalInput > 0)
+                {
+                    wheelTurn(Vector3.up);
+                }
+                else
+                {
+                    wheelTurn(Vector3.down);
+                }
+                */
             }
-            else
-            {
-                // disabling for acceleration approach
-                //wheelRotate(Vector3.left);
-            }
-            /*
-            if (horizontalInput > 0)
-            {
-                wheelTurn(Vector3.up);
-            }
-            else
-            {
-                wheelTurn(Vector3.down);
-            }
-            */
+
         }
-        
+
     }
 
+    /** This function checks whether all the wheels of the player are on the ground
+     * 
+     */
+
+    bool isOnGround()
+    {
+        wheelsOnGround = 0;
+        foreach (WheelCollider wheel in allWheels)
+        {
+            if (wheel.isGrounded)
+            {
+                wheelsOnGround++;
+            }
+        }
+        if (wheelsOnGround == 4)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    /** Made this function to check for forced/object collisions causing the bus to stumble onto its side.
+     * 
+     */
     private void OnCollisionEnter(Collision other)
     {
         Debug.Log("Collision with " + other.gameObject.name);
