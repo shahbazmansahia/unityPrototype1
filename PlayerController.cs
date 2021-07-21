@@ -1,13 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class PlayerController : MonoBehaviour
-{   
+{
     // declared private because we don't want them to be very accessible
+    private const float KILOMETERCONST = 3.6f;
+    private const float MILESCONST = 2.237f;
+
+
     [SerializeField] public float velocity = 5.0f;
     [SerializeField] private float horsePower = 0.0f;
     [SerializeField] private float turnSpeed = 25.0f;
+
     private Rigidbody playerRb;
     //public const float tyreFriction = 0.07f;
     //public const float gravityForce = 9.8f;
@@ -20,6 +27,8 @@ public class PlayerController : MonoBehaviour
     public GameObject wheel4;           // wheel back right
 
     [SerializeField] private GameObject centreOfMass;
+
+    public TextMeshProUGUI speedoMeterText;
     //Rigidbody rb;
     //private float mass;
 
@@ -27,7 +36,9 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         playerRb = GetComponent<Rigidbody>();
-        playerRb.centerOfMass = centreOfMass.transform.position;
+        
+        // DISABLED BECAUSE THIS WAS ACTUALLY MAKING THINGS WORSE!
+        //playerRb.centerOfMass = centreOfMass.transform.position;
         //mass = rb.mass;
     }
 
@@ -49,6 +60,10 @@ public class PlayerController : MonoBehaviour
 
         // This makes the transform-Translate approach redundant; We are finally trying the acceleration approach!
         playerRb.AddRelativeForce(Vector3.forward * forwardInput * horsePower);
+
+        // for displaying the speed on the UI
+        velocity = Mathf.Round(playerRb.velocity.magnitude * KILOMETERCONST);
+        speedoMeterText.text = "Speed: " + velocity;
 
         // For horizontal mobility
         if (forwardInput != 0)
